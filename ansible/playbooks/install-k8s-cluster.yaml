@@ -150,7 +150,7 @@
         remote_src: yes
         owner: ubuntu
 
-    - name: create .kube directory for user ubuntu on DevSecOps Server (Ansible controller)
+    - name: create .kube directory for user ubuntu on infra-server (Ansible controller)
       local_action:
         module: file
         path: /home/ubuntu/.kube
@@ -158,19 +158,11 @@
         mode: 0755
         owner: ubuntu
 
-    - name: copy admin.conf to user's kube config for user ubuntu on local machine (SevSecOps Server)
+    - name: copy admin.conf to user's kube config for user ubuntu on infra-server (Ansible controller)
       fetch:
         src: /etc/kubernetes/admin.conf
-        dest: /home/ubuntu/.kube/config
+        dest: /home/ubuntu/.kube/config-k8s
         flat: yes
-
-    - name: copy admin.conf to user's kube config for user ubuntu
-      remote_user: root
-      copy:
-        src: /etc/kubernetes/admin.conf
-        dest: /home/ubuntu/.kube/config
-        remote_src: yes
-        owner: ubuntu
 
     - name: get join command
       shell: kubeadm token create --print-join-command
