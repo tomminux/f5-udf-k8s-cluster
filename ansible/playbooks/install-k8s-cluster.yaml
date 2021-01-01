@@ -199,14 +199,14 @@
 
     - name: Configure Calico to use 10.244.0.0 POD Network - Step 1
       lineinfile: 
-        dest: /home/ubuntu/calico-k3s.yaml
+        dest: /home/ubuntu/calico-k8s.yaml
         regexp: 'CALICO_IPV4POOL_CIDR' 
         line: '            - name: CALICO_IPV4POOL_CIDR'
         backrefs: yes
 
     - name: Configure Calico to use 10.244.0.0 POD Network - Step 2
       lineinfile: 
-        dest: /home/ubuntu/calico-k3s.yaml
+        dest: /home/ubuntu/calico-k8s.yaml
         regexp: '192.168.0.0/16' 
         line: '              value: "10.244.0.0/16"'
         backrefs: yes
