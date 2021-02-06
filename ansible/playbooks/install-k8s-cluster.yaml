@@ -85,37 +85,19 @@
         name: kubelet=1.18.15-00
         state: present
         update_cache: true
+        force: yes
 
     - name: install kubeadm
       apt:
         name: kubeadm=1.18.15-00
         state: present
+        force: yes
 
     - name: install kubectl
       apt:
         name: kubectl=1.18.15-00
         state: present
-
-    - name: Remove resolv.conf link
-      file:
-        path: /etc/resolv.conf
-        state: absent
-
-    - name: Copy resolv.conf file on cluster's master and nodes
-      copy:
-        src: resolv.conf
-        dest: /etc/resolv.conf
-
-    - name: Enable rc.local
-      template:
-        src: rc.local.j2
-        dest: /etc/rc.local
-        mode: 0700
-
-    - name: setting hostname
-      template:
-        src: hostname.j2
-        dest: /etc/hostname
+        force: yes
 
     - name: Deploy registry certificates on all nodes - creating directory
       file:
